@@ -8,6 +8,8 @@ import 'features/tasks/data/datasources/task_local_datasource.dart';
 import 'features/tasks/data/models/task_model.dart';
 import 'features/tasks/presentation/providers/task_providers.dart';
 import 'routes/app_router.dart';
+import 'screens/auth/data/auth_providers.dart';
+import 'screens/auth/data/auth_service.dart';
 
 Future<void> main() async {
   // Ensure bindings are ready before any async/platform work.
@@ -19,8 +21,9 @@ Future<void> main() async {
     Hive.registerAdapter(TaskModelAdapter());
   }
 
-  // Open the box up-front so the UI never has to await it.
+  // Open the boxes up-front so the UI never has to await them.
   final box = await TaskLocalDataSourceImpl.openBox();
+  final authBox = await AuthService.openBox();
 
   // Catch any otherwise-unhandled framework errors and log them.
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -30,8 +33,11 @@ Future<void> main() async {
 
   runApp(
     ProviderScope(
-      // Inject the opened Hive box into the provider graph.
-      overrides: <Override>[taskBoxProvider.overrideWithValue(box)],
+      // Inject the opened Hive boxes into the provider graph.
+      overrides: <Override>[
+        taskBoxProvider.overrideWithValue(box),
+        authBoxProvider.overrideWithValue(authBox),
+      ],
       child: const TaskManagerApp(),
     ),
   );

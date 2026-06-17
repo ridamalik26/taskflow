@@ -10,6 +10,7 @@ class AppConstants {
 
   // Hive.
   static const String taskBoxName = 'tasks_box';
+  static const String authBoxName = 'auth_box';
 
   // Durations.
   static const Duration splashDuration = Duration(seconds: 3);

@@ -3,6 +3,8 @@ class AppRoutes {
   AppRoutes._();
 
   static const String splash = '/';
+  static const String login = '/login';
+  static const String register = '/register';
   static const String home = '/home';
   static const String createTask = '/create';
   static const String editTask = '/edit'; // expects :id path param
@@ -10,6 +12,8 @@ class AppRoutes {
 
   // Named routes (handy for `context.goNamed`).
   static const String splashName = 'splash';
+  static const String loginName = 'login';
+  static const String registerName = 'register';
   static const String homeName = 'home';
   static const String createTaskName = 'create';
   static const String editTaskName = 'edit';

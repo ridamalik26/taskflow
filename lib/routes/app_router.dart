@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/constants/app_constants.dart';
+import '../screens/auth/login_screen.dart';
+import '../screens/auth/register_screen.dart';
 import '../features/tasks/presentation/screens/create_task_screen.dart';
 import '../features/tasks/presentation/screens/edit_task_screen.dart';
 import '../features/tasks/presentation/screens/home_screen.dart';
@@ -21,6 +23,20 @@ class AppRouter {
         name: AppRoutes.splashName,
         builder: (BuildContext context, GoRouterState state) =>
             const SplashScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.login,
+        name: AppRoutes.loginName,
+        pageBuilder: (BuildContext context, GoRouterState state) => _fadePage(
+          state,
+          LoginScreen(prefilledEmail: state.extra as String?),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.register,
+        name: AppRoutes.registerName,
+        pageBuilder: (BuildContext context, GoRouterState state) =>
+            _slidePage(state, const RegisterScreen()),
       ),
       GoRoute(
         path: AppRoutes.home,

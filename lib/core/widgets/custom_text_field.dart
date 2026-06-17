@@ -18,6 +18,8 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.suffixIcon,
+    this.obscureText = false,
+    this.onFieldSubmitted,
   });
 
   final TextEditingController controller;
@@ -32,6 +34,8 @@ class CustomTextField extends StatelessWidget {
   final bool readOnly;
   final VoidCallback? onTap;
   final Widget? suffixIcon;
+  final bool obscureText;
+  final void Function(String)? onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +51,10 @@ class CustomTextField extends StatelessWidget {
           maxLength: maxLength,
           readOnly: readOnly,
           onTap: onTap,
+          obscureText: obscureText,
           keyboardType: keyboardType,
           textInputAction: textInputAction,
+          onFieldSubmitted: onFieldSubmitted,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             hintText: hint,
