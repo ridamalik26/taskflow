@@ -6,7 +6,7 @@ import '../screens/auth/login_screen.dart';
 import '../screens/auth/register_screen.dart';
 import '../features/tasks/presentation/screens/create_task_screen.dart';
 import '../features/tasks/presentation/screens/edit_task_screen.dart';
-import '../features/tasks/presentation/screens/home_screen.dart';
+import '../screens/home/home_dashboard.dart';
 import '../features/tasks/presentation/screens/splash_screen.dart';
 import '../features/tasks/presentation/screens/task_details_screen.dart';
 import 'app_routes.dart';
@@ -42,7 +42,7 @@ class AppRouter {
         path: AppRoutes.home,
         name: AppRoutes.homeName,
         pageBuilder: (BuildContext context, GoRouterState state) =>
-            _fadePage(state, const HomeScreen()),
+            _fadePage(state, const HomeDashboard()),
       ),
       GoRoute(
         path: AppRoutes.createTask,
