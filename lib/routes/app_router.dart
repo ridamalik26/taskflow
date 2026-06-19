@@ -9,6 +9,7 @@ import '../features/tasks/presentation/screens/edit_task_screen.dart';
 import '../screens/home/home_dashboard.dart';
 import '../features/tasks/presentation/screens/splash_screen.dart';
 import '../features/tasks/presentation/screens/task_details_screen.dart';
+import '../screens/tasks/tasks_screen.dart';
 import 'app_routes.dart';
 
 /// Builds the application's [GoRouter] with all routes and transitions.
@@ -65,6 +66,12 @@ class AppRouter {
           state,
           TaskDetailsScreen(taskId: state.pathParameters['id']!),
         ),
+      ),
+      GoRoute(
+        path: AppRoutes.tasks,
+        name: AppRoutes.tasksName,
+        pageBuilder: (BuildContext context, GoRouterState state) =>
+            _slidePage(state, const TasksScreen()),
       ),
     ],
     errorBuilder: (BuildContext context, GoRouterState state) => Scaffold(

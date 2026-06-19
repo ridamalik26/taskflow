@@ -655,6 +655,9 @@ class _TaskListHeader extends StatelessWidget {
   final TaskPriority? selectedCategory;
   final int count;
 
+  bool get _isDefaultView =>
+      searchQuery.isEmpty && selectedCategory == null;
+
   @override
   Widget build(BuildContext context) {
     final TextTheme text = Theme.of(context).textTheme;
@@ -676,14 +679,38 @@ class _TaskListHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(title, style: text.titleMedium),
-          AnimatedSwitcher(
-            duration: AppConstants.shortAnimation,
-            child: Text(
-              '$count task${count == 1 ? '' : 's'}',
-              key: ValueKey<int>(count),
-              style: text.bodySmall,
+          if (_isDefaultView)
+            TextButton(
+              onPressed: () => context.push(AppRoutes.tasks),
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppConstants.spacingSm,
+                  vertical: AppConstants.spacingXs,
+                ),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text('View All', style: text.labelLarge?.copyWith(
+                    color: AppColors.primary,
+                  )),
+                  const SizedBox(width: 2),
+                  const Icon(Icons.arrow_forward_rounded,
+                      size: 16, color: AppColors.primary),
+                ],
+              ),
+            )
+          else
+            AnimatedSwitcher(
+              duration: AppConstants.shortAnimation,
+              child: Text(
+                '$count task${count == 1 ? '' : 's'}',
+                key: ValueKey<int>(count),
+                style: text.bodySmall,
+              ),
             ),
-          ),
         ],
       ),
     );
