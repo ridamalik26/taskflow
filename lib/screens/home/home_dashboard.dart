@@ -695,10 +695,10 @@ class _TaskListHeader extends StatelessWidget {
                 children: <Widget>[
                   Text('View All', style: text.labelLarge?.copyWith(
                     color: AppColors.primary,
-                  )),
+                  ),),
                   const SizedBox(width: 2),
                   const Icon(Icons.arrow_forward_rounded,
-                      size: 16, color: AppColors.primary),
+                      size: 16, color: AppColors.primary,),
                 ],
               ),
             )
