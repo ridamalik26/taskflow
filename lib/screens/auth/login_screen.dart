@@ -77,8 +77,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       case LoginResult.wrongPassword:
         AppSnackbar.error(context, 'Incorrect password. Please try again.');
       case LoginResult.success:
-        ref.read(currentUserEmailProvider.notifier).state =
-            _emailController.text.trim().toLowerCase();
         AppSnackbar.success(context, 'Welcome! You have logged in successfully.');
         context.go(AppRoutes.home);
     }

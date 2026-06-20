@@ -43,13 +43,6 @@ class AuthService {
     return LoginResult.success;
   }
 
-  /// Returns the stored account data for [email], or `null` if not found.
-  Map<String, String>? getUser(String email) {
-    final dynamic stored = _box.get(_key(email));
-    if (stored == null) return null;
-    return Map<String, String>.from(stored as Map);
-  }
-
   String _key(String email) => email.trim().toLowerCase();
 
   /// Opens (or returns the already-open) Hive box backing the account store.

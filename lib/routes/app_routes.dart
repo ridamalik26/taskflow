@@ -10,7 +10,6 @@ class AppRoutes {
   static const String editTask = '/edit'; // expects :id path param
   static const String taskDetails = '/task'; // expects :id path param
   static const String tasks = '/tasks';
-  static const String profile = '/profile';
 
   // Named routes (handy for `context.goNamed`).
   static const String splashName = 'splash';
@@ -21,5 +20,4 @@ class AppRoutes {
   static const String editTaskName = 'edit';
   static const String taskDetailsName = 'details';
   static const String tasksName = 'tasks';
-  static const String profileName = 'profile';
 }

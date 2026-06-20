@@ -13,7 +13,3 @@ final authBoxProvider = Provider<Box<dynamic>>(
 final authServiceProvider = Provider<AuthService>(
   (ref) => AuthService(ref.watch(authBoxProvider)),
 );
-
-/// Holds the normalized email of the currently signed-in user.
-/// Empty string means no session.
-final currentUserEmailProvider = StateProvider<String>((ref) => '');
