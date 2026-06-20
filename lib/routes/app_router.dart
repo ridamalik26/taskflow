@@ -9,6 +9,8 @@ import '../features/tasks/presentation/screens/edit_task_screen.dart';
 import '../screens/home/home_dashboard.dart';
 import '../features/tasks/presentation/screens/splash_screen.dart';
 import '../features/tasks/presentation/screens/task_details_screen.dart';
+import '../screens/profile/profile_screen.dart';
+import '../screens/shell/main_shell.dart';
 import '../screens/tasks/tasks_screen.dart';
 import 'app_routes.dart';
 
@@ -39,12 +41,34 @@ class AppRouter {
         pageBuilder: (BuildContext context, GoRouterState state) =>
             _slidePage(state, const RegisterScreen()),
       ),
-      GoRoute(
-        path: AppRoutes.home,
-        name: AppRoutes.homeName,
-        pageBuilder: (BuildContext context, GoRouterState state) =>
-            _fadePage(state, const HomeDashboard()),
+
+      // ── Shell: persistent bottom nav for the three main tabs ─────────────
+      ShellRoute(
+        builder: (BuildContext context, GoRouterState state, Widget child) =>
+            MainShell(child: child),
+        routes: <RouteBase>[
+          GoRoute(
+            path: AppRoutes.home,
+            name: AppRoutes.homeName,
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                _fadePage(state, const HomeDashboard()),
+          ),
+          GoRoute(
+            path: AppRoutes.tasks,
+            name: AppRoutes.tasksName,
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                _fadePage(state, const TasksScreen()),
+          ),
+          GoRoute(
+            path: AppRoutes.profile,
+            name: AppRoutes.profileName,
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                _fadePage(state, const ProfileScreen()),
+          ),
+        ],
       ),
+
+      // ── Detail / form screens (push on top of shell) ─────────────────────
       GoRoute(
         path: AppRoutes.createTask,
         name: AppRoutes.createTaskName,
@@ -67,19 +91,13 @@ class AppRouter {
           TaskDetailsScreen(taskId: state.pathParameters['id']!),
         ),
       ),
-      GoRoute(
-        path: AppRoutes.tasks,
-        name: AppRoutes.tasksName,
-        pageBuilder: (BuildContext context, GoRouterState state) =>
-            _slidePage(state, const TasksScreen()),
-      ),
     ],
     errorBuilder: (BuildContext context, GoRouterState state) => Scaffold(
       body: Center(child: Text('Route not found: ${state.uri}')),
     ),
   );
 
-  /// A fade transition page (used for the home screen).
+  /// A fade transition page (used for shell tabs).
   static CustomTransitionPage<void> _fadePage(
     GoRouterState state,
     Widget child,
